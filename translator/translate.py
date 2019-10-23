@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
 
-from langs import LANGUAGES
+from translator.langs import LANGUAGES
 
 GTRAN_URL = "https://translate.google.com/#view=home&op=translate&sl={sl}&tl={tl}"
 DEFAULT_TL = "en"
@@ -93,5 +93,5 @@ class BadLanguageError(Exception):
 if __name__ == "__main__":
     T = Translator()
     print("Translating")
-    print(T.translate("こんにちは世界", "engrish"))
+    print(T.translate("こんにちは世界"))
     T.cleanup()
