@@ -1,0 +1,8 @@
+"""
+Define names to export to AIGIS
+"""
+from translator.translate import Translator
+
+translator = Translator()
+
+SKILLS = ["translator"]
