@@ -62,8 +62,15 @@ class Translator():
     def cleanup(self):
         """
         Cleanup the translation service by closing the Selenium webdriver.
+
+        The Selenium docs note that the difference between close() and quit() is that quit() halts the entire
+        process while close() exists the current tab (quitting the process if it's the only tab open in most
+        browsers).
+        For some reason, probably having to do with subprocess management on python exit, using close() to
+        clean up within an atexit clause causes a urllib3 error to be thrown. Since this is an independent
+        browser session, we can safely quit on exit anyway though, so we do that instead.
         """
-        self.driver.close()
+        self.driver.quit()
 
 
 def _get_lang(language):
