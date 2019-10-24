@@ -4,5 +4,6 @@ Define names to export to AIGIS
 from translator.translate import Translator
 
 translator = Translator()
+cleanup = translator.cleanup
 
-SKILLS = ["translator"]
+SKILLS = ["translator", "cleanup"]
