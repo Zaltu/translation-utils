@@ -1,7 +1,8 @@
 """
 Const file for storing the language to Google Translate code mapping.
 """
-LANGUAGES = {  # "detect language": "auto"
+LANGUAGES = {
+    "auto": "auto",
     "afrikaans": "af",
     "albanian": "sq",
     "amharic": "am",
