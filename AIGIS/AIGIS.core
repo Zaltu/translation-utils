@@ -9,6 +9,6 @@ class Translation():
     BadLanguageError = BadLanguageError
 
 translation = Translation()
-cleanup = translator.cleanup
+cleanup = _translator.cleanup
 
 SKILLS = ["translation", "cleanup"]
