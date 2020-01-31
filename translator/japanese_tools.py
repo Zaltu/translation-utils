@@ -42,85 +42,87 @@ def __hiragana_conv__():
     kakasi.setMode("s", True)
     return kakasi.getConverter().do
 
-class JPStr:
-    """
-    Essentially a subclass of str to add functionality explicit to Japanese.
-
-    Use the class methods to_romaji, to_hiragana or to_furigana as JPStr factories.
-    JPStr(stirng) and to_romaji(string) will return the same thing.
-
-    :param str string: string to improve
-    :param str default: do not touch
-    """
-    _hiragana_conv = __hiragana_conv__()
-    _romaji_conv = __romaji_conv__()
-    _furigana_conv = __furigana_conv__()
-    def __init__(self, string, default="romaji"):
-        self.original = string
-        self.hiragana = JPStr._hiragana_conv(string)
-        self.romaji = JPStr._romaji_conv(string)
-        self.furigana = JPStr._furigana_conv(string)
-        self.default = getattr(self, default, self.romaji)
-
-    def __str__(self):
+def wrapper():
+    class JPStr:
         """
-        Default simple string representation.
-        Uses whatever the default representation of this JPStr instance is.
+        Essentially a subclass of str to add functionality explicit to Japanese.
 
-        :returns: string representation
-        :rtype: str
+        Use the class methods to_romaji, to_hiragana or to_furigana as JPStr factories.
+        JPStr(stirng) and to_romaji(string) will return the same thing.
+
+        :param str string: string to improve
+        :param str default: do not touch
         """
-        return self.default
+        _hiragana_conv = __hiragana_conv__()
+        _romaji_conv = __romaji_conv__()
+        _furigana_conv = __furigana_conv__()
+        def __init__(self, string, default="romaji"):
+            self.original = string
+            self.hiragana = JPStr._hiragana_conv(string)
+            self.romaji = JPStr._romaji_conv(string)
+            self.furigana = JPStr._furigana_conv(string)
+            self.default = getattr(self, default, self.romaji)
 
-    def __repr__(self):
-        """
-        Display all the versions of the text stored within this JPStr.
+        def __str__(self):
+            """
+            Default simple string representation.
+            Uses whatever the default representation of this JPStr instance is.
 
-        :returns: string representation
-        :rtype: str
-        """
-        return f"Original: {self.original}\n"\
-        f"Romaji: {self.romaji}\n"\
-        f"Hiragana: {self.hiragana}\n"\
-        f"Furigana: {self.furigana}\n"
+            :returns: string representation
+            :rtype: str
+            """
+            return self.default
 
-    @classmethod
-    def to_hiragana(cls, string):
-        """
-        Factory function to create a JPStr from a string.
-        Sets default output type to Hiragana.
+        def __repr__(self):
+            """
+            Display all the versions of the text stored within this JPStr.
 
-        :param str string: string to enrich
+            :returns: string representation
+            :rtype: str
+            """
+            return f"Original: {self.original}\n"\
+            f"Romaji: {self.romaji}\n"\
+            f"Hiragana: {self.hiragana}\n"\
+            f"Furigana: {self.furigana}\n"
 
-        :returns: enriched string
-        :rtype: JPStr
-        """
-        return JPStr(string, default="hiragana")
+        @classmethod
+        def to_hiragana(cls, string):
+            """
+            Factory function to create a JPStr from a string.
+            Sets default output type to Hiragana.
 
-    @classmethod
-    def to_romaji(cls, string):
-        """
-        Factory function to create a JPStr from a string.
-        Sets default output type to Romaji.
+            :param str string: string to enrich
 
-        Behaves the same as JPStr(string)
+            :returns: enriched string
+            :rtype: JPStr
+            """
+            return JPStr(string, default="hiragana")
 
-        :param str string: string to enrich
+        @classmethod
+        def to_romaji(cls, string):
+            """
+            Factory function to create a JPStr from a string.
+            Sets default output type to Romaji.
 
-        :returns: enriched string
-        :rtype: JPStr
-        """
-        return JPStr(string)
+            Behaves the same as JPStr(string)
 
-    @classmethod
-    def to_furigana(cls, string):
-        """
-        Factory function to create a JPStr from a string.
-        Sets default output type to Furigana.
+            :param str string: string to enrich
 
-        :param str string: string to enrich
+            :returns: enriched string
+            :rtype: JPStr
+            """
+            return JPStr(string)
 
-        :returns: enriched string
-        :rtype: JPStr
-        """
-        return JPStr(string, default="furigana")
+        @classmethod
+        def to_furigana(cls, string):
+            """
+            Factory function to create a JPStr from a string.
+            Sets default output type to Furigana.
+
+            :param str string: string to enrich
+
+            :returns: enriched string
+            :rtype: JPStr
+            """
+            return JPStr(string, default="furigana")
+    return JPStr

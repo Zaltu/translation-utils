@@ -2,15 +2,16 @@
 Define names to export to AIGIS
 """
 from translator.translate import Translator, BadLanguageError
-from translator.japanese_tools import JPStr
+from translator.japanese_tools import wrapper
 
 _translator = Translator()
 class Translation():
     translate = _translator.translate
     BadLanguageError = BadLanguageError
 
+japanese = wrapper()
+
 translation = Translation()
 cleanup = _translator.cleanup
-japanese = JPStr
 
 SKILLS = ["translation", "japanese", "cleanup"]
