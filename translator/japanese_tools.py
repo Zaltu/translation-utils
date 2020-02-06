@@ -15,7 +15,7 @@ def __romaji_conv__():
     kakasi.setMode("K", "a")
     kakasi.setMode("s", True)
     return kakasi.getConverter().do
-__ROMAJI_CONV = __romaji_conv__()
+_ROMAJI_CONV = __romaji_conv__()
 
 def __furigana_conv__():
     """
@@ -29,7 +29,7 @@ def __furigana_conv__():
     kakasi.setMode("K", "aF")
     kakasi.setMode("s", True)
     return kakasi.getConverter().do
-__FURIGANA_CONV = __furigana_conv__()
+_FURIGANA_CONV = __furigana_conv__()
 
 def __hiragana_conv__():
     """
@@ -43,7 +43,7 @@ def __hiragana_conv__():
     kakasi.setMode("K", "H")
     kakasi.setMode("s", True)
     return kakasi.getConverter().do
-__HIRAGANA_CONV = __hiragana_conv__()
+_HIRAGANA_CONV = __hiragana_conv__()
 
 class JPStr:
     """
@@ -57,9 +57,9 @@ class JPStr:
     """
     def __init__(self, string, default="romaji"):
         self.original = string
-        self.hiragana = __HIRAGANA_CONV(string)
-        self.romaji = __ROMAJI_CONV(string)
-        self.furigana = __FURIGANA_CONV(string)
+        self.hiragana = _HIRAGANA_CONV(string)
+        self.romaji = _ROMAJI_CONV(string)
+        self.furigana = _FURIGANA_CONV(string)
         self.default = getattr(self, default, self.romaji)
 
     def __str__(self):
