@@ -83,6 +83,15 @@ class JPStr:
         f"Romaji: {self.romaji}\n"\
         f"Hiragana: {self.hiragana}\n"\
         f"Furigana: {self.furigana}\n"
+    
+    def __len__(self):
+        """
+        Length of this string is considered the length of the default representation.
+
+        :returns: length of the default representation
+        :rtype: int
+        """
+        return len(self.default)
 
 
 def to_hiragana(string):
@@ -113,7 +122,7 @@ def to_romaji(string):
     return JPStr(string)
 
 
-def to_furigana(string):
+def to_furigana(test, string):
     """
     Factory function to create a JPStr from a string.
     Sets default output type to Furigana.
